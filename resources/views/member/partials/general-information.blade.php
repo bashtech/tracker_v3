@@ -40,7 +40,7 @@
 
                     <div class="col-md-3 col-xs-12 text-center">
                         <h2 class="no-margins">
-                            @if ($member->last_voice_activity)
+                            @if ($member->last_voice_activity && !str_contains($member->last_voice_activity, '1970'))
                                 {{ Carbon::parse($member->last_voice_activity)->diffInDays() }}
                                 {{ \Illuminate\Support\Str::plural('day',
                             $member->last_voice_activity->diffInDays()) }}
