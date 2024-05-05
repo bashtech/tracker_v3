@@ -211,7 +211,7 @@ class TicketController extends Controller
         $ticket->notify(new NotifyCallerTicketUpdated($message));
 
         if ($ticket->message_id) {
-            $ticket->notify(new TicketReaction('on-hold'));
+            $ticket->notify(new TicketReaction('on_hold'));
         }
 
         return redirect(route('help.tickets.show', $ticket));
@@ -230,26 +230,7 @@ class TicketController extends Controller
         $ticket->notify(new NotifyCallerTicketUpdated($message));
 
         if ($ticket->message_id) {
-            $ticket->notify(new TicketReaction('in-progress'));
-        }
-
-        return redirect(route('help.tickets.show', $ticket));
-    }
-
-    public function update(Ticket $ticket)
-    {
-        $this->authorize('manage', $ticket);
-
-        $ticket->resume();
-
-        $message = "Ticket `{$ticket->type->name}` is in progress.";
-
-        $this->showToast($message);
-
-        $ticket->notify(new NotifyCallerTicketUpdated($message));
-
-        if ($ticket->message_id) {
-            $ticket->notify(new TicketReaction('assigned'));
+            $ticket->notify(new TicketReaction('in_progress'));
         }
 
         return redirect(route('help.tickets.show', $ticket));

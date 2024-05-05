@@ -10,6 +10,8 @@ class BotReactMessage
         'resolved' => '✅',
         'rejected' => '❌',
         'assigned' => '⏳',
+        'in_progress' => '⏳',
+        'on_hold' => '⚠️',
     ];
 
     private string $emote;
@@ -56,7 +58,7 @@ class BotReactMessage
     public function send(): array
     {
         if (! $this->emote) {
-            throw new Exception('A status {assigned, resolved, rejected} must be defined');
+            throw new Exception('A status {assigned, in_progress, on_hold, resolved, rejected} must be defined');
         }
 
         $routeTarget = $this->notifiable->routeNotificationFor('bot');
