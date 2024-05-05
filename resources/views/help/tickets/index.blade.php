@@ -45,7 +45,10 @@
                         <i class="fa fa-asterisk text-info"></i> New</a>
                     <a href="?filter[state]=assigned"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'assigned' ? 'active' : '' }}">
-                        <i class="fa fa-sync text-accent"></i> Assigned</a>
+                        <i class="fa fa-user-circle text-accent"></i> Assigned</a>
+                    <a href="?filter[state]=in_progress"
+                       class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'in_progress' ? 'active' : '' }}">
+                        <i class="fa fa-sync text-accent"></i> In Progress</a>
                     <a href="?filter[state]=on_hold"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'on_hold' ? 'active' : '' }}">
                         <i class="fa fa-hourglass-half text-info"></i> On Hold</a>
@@ -76,7 +79,7 @@
                                 <option value="caller.member.clan_id">Caller Clan ID</option>
                                 <option value="owner.name">Owner Name</option>
                                 <option value="owner.member.clan_id">Owner Clan ID</option>
-                                <option value="state">State (new, assigned, on hold, resolved, rejected)</option>
+                                <option value="state">State (new, assigned, in progress, on hold, resolved, rejected)</option>
                             </select>
                         </div>
                         <div class="col-md-9">

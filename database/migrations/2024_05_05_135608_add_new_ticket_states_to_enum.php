@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tickets', function (Blueprint $table) {
-            \DB::statement("ALTER TABLE `tickets` CHANGE `state` `state` enum('new','assigned','resolved','rejected','on_hold') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new';");
+            \DB::statement("ALTER TABLE `tickets` CHANGE `state` `state` enum('new','assigned','resolved','rejected','on_hold','in_progress') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new';");
         });
     }
 

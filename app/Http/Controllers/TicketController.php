@@ -198,13 +198,13 @@ class TicketController extends Controller
         return redirect(route('help.tickets.show', $ticket));
     }
 
-    public function placeOnHold(Ticket $ticket)
+    public function onHold(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);
 
         $ticket->placeOnHold();
 
-        $message = "Ticket `{$ticket->type->name}` has been placed on hold pending additional information.";
+        $message = "Ticket `{$ticket->type->name}` has been placed on hold.";
 
         $this->showToast($message);
 
@@ -217,7 +217,26 @@ class TicketController extends Controller
         return redirect(route('help.tickets.show', $ticket));
     }
 
-    public function resume(Ticket $ticket)
+    public function inProgress(Ticket $ticket)
+    {
+        $this->authorize('manage', $ticket);
+
+        $ticket->inProgress();
+
+        $message = "Ticket `{$ticket->type->name}` is in progress.";
+
+        $this->showToast($message);
+
+        $ticket->notify(new NotifyCallerTicketUpdated($message));
+
+        if ($ticket->message_id) {
+            $ticket->notify(new TicketReaction('in-progress'));
+        }
+
+        return redirect(route('help.tickets.show', $ticket));
+    }
+
+    public function update(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);
 

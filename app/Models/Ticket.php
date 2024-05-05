@@ -18,8 +18,9 @@ class Ticket extends Model
     use Notifiable;
 
     public $stateColors = [
-        'new' => 'info',
-        'assigned' => 'accent',
+        'new' => 'accent',
+        'assigned' => 'info',
+        'in_progress' => 'info',
         'on_hold' => 'info',
         'resolved' => 'success',
         'rejected' => 'danger',
@@ -160,9 +161,9 @@ class Ticket extends Model
         $this->say('placed ticket on hold');
     }
 
-    public function resume()
+    public function inProgress()
     {
-        $this->state = 'assigned';
+        $this->state = 'in_progress';
         $this->save();
         $this->say('placed ticket in progress');
     }

@@ -49,17 +49,18 @@
                             </form>
                         @endif
                         @unless ($ticket->isResolved())
-                            @unless($ticket->state == 'on_hold')
-                            <form action="{{ route('help.tickets.place-on-hold', $ticket) }}" method="POST"
-                                  class="inline" style="margin-left: 10px;">
-                                <button class="btn btn-info" type="submit">Place On Hold</button>
-                                {{ method_field('PATCH') }}
-                                {{ csrf_field() }}
-                            </form>
-                            @else
-                                <form action="{{ route('help.tickets.self-assign', $ticket) }}" method="POST"
+                            @unless ($ticket->state == 'in_progress')
+                                <form action="{{ route('help.tickets.in-progress', $ticket) }}" method="POST"
                                       class="inline" style="margin-left: 10px;">
-                                    <button class="btn btn-info" type="submit">Resume</button>
+                                    <button class="btn btn-info" type="submit">In Progress</button>
+                                    {{ method_field('PATCH') }}
+                                    {{ csrf_field() }}
+                                </form>
+                            @endunless
+                            @unless ($ticket->state == 'on_hold')
+                                <form action="{{ route('help.tickets.on-hold', $ticket) }}" method="POST"
+                                      class="inline" style="margin-left: 10px;">
+                                    <button class="btn btn-info" type="submit">On Hold</button>
                                     {{ method_field('PATCH') }}
                                     {{ csrf_field() }}
                                 </form>

@@ -27,8 +27,8 @@ Route::name('help.tickets.')->prefix('help/tickets')->group(function () {
     Route::get('{ticket}', 'TicketController@show')->name('show');
     Route::patch('{ticket}/self-assign', 'TicketController@selfAssign')->name('self-assign');
     Route::patch('{ticket}/assign-to', 'TicketController@assignTo')->name('assign-to');
-    Route::patch('{ticket}/place-on-hold', 'TicketController@placeOnHold')->name('place-on-hold');
-    Route::patch('{ticket}/resume', 'TicketController@resume')->name('resume');
+    Route::patch('{ticket}/on-hold', 'TicketController@OnHold')->name('on-hold');
+    Route::patch('{ticket}/in-progress', 'TicketController@inProgress')->name('in-progress');
     Route::patch('{ticket}/resolve', 'TicketController@resolve')->name('resolve');
     Route::patch('{ticket}/reopen', 'TicketController@reopen')->name('reopen');
     Route::patch('{ticket}/reject', 'TicketController@reject')->name('reject');
