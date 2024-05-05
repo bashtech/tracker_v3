@@ -20,6 +20,7 @@ class Ticket extends Model
     public $stateColors = [
         'new' => 'info',
         'assigned' => 'accent',
+        'on_hold' => 'info',
         'resolved' => 'success',
         'rejected' => 'danger',
     ];
@@ -97,6 +98,15 @@ class Ticket extends Model
             ->whereNotIn('state', ['new', 'resolved']);
     }
 
+    /**
+     * @return mixed
+     */
+    public function scopeOnHold($query)
+    {
+        return $query->where('state', 'on_hold')
+            ->whereNotIn('state', ['new', 'resolved']);
+    }
+
     public function scopeResolved($query)
     {
         return $query->where('state', 'resolved')
@@ -141,6 +151,20 @@ class Ticket extends Model
         $this->resolved_at = null;
         $this->save();
         $this->say('reopened the ticket');
+    }
+
+    public function placeOnHold()
+    {
+        $this->state = 'on_hold';
+        $this->save();
+        $this->say('placed ticket on hold');
+    }
+
+    public function resume()
+    {
+        $this->state = 'assigned';
+        $this->save();
+        $this->say('placed ticket in progress');
     }
 
     public function reject()

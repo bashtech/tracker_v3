@@ -122,12 +122,12 @@
 
             @can('manage', \App\Models\Ticket::class)
                 <li>
-                    <a href="{{ route('help.tickets.index') . '?filter[state]=assigned&filter[owner.name]=' . auth()->user()->name }}">
+                    <a href="{{ route('help.tickets.index') . '?filter[state]=assigned,on_hold&filter[owner.name]=' . auth()->user()->name }}">
                         Assigned To Me
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('help.tickets.index') . '?filter[state]=new,assigned' }}">
+                    <a href="{{ route('help.tickets.index') . '?filter[state]=new,assigned,on_hold' }}">
                         All Tickets
                     </a>
                 </li>

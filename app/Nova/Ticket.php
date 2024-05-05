@@ -50,7 +50,7 @@ class Ticket extends Resource
             BelongsTo::make('Caller', 'caller', '\App\Nova\User')->searchable(),
             BelongsTo::make('Owner', 'owner', '\App\Nova\User')->searchable()->nullable(),
             Textarea::make('Description'),
-            Select::make('State')->options(['new' => 'New', 'assigned' => 'Assigned to admin', 'resolved' => 'Resolved']),
+            Select::make('State')->options(['new' => 'New', 'assigned' => 'Assigned to admin', 'on_hold' => 'On Hold', 'resolved' => 'Resolved']),
             Date::make('Created At'),
             Date::make('Updated At'),
         ];

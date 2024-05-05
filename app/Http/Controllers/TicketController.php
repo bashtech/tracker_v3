@@ -198,6 +198,44 @@ class TicketController extends Controller
         return redirect(route('help.tickets.show', $ticket));
     }
 
+    public function placeOnHold(Ticket $ticket)
+    {
+        $this->authorize('manage', $ticket);
+
+        $ticket->placeOnHold();
+
+        $message = "Ticket `{$ticket->type->name}` has been placed on hold pending additional information.";
+
+        $this->showToast($message);
+
+        $ticket->notify(new NotifyCallerTicketUpdated($message));
+
+        if ($ticket->message_id) {
+            $ticket->notify(new TicketReaction('on-hold'));
+        }
+
+        return redirect(route('help.tickets.show', $ticket));
+    }
+
+    public function resume(Ticket $ticket)
+    {
+        $this->authorize('manage', $ticket);
+
+        $ticket->resume();
+
+        $message = "Ticket `{$ticket->type->name}` is in progress.";
+
+        $this->showToast($message);
+
+        $ticket->notify(new NotifyCallerTicketUpdated($message));
+
+        if ($ticket->message_id) {
+            $ticket->notify(new TicketReaction('assigned'));
+        }
+
+        return redirect(route('help.tickets.show', $ticket));
+    }
+
     public function selfAssign(Ticket $ticket)
     {
         $this->authorize('manage', $ticket);

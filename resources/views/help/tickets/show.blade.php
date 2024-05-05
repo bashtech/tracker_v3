@@ -24,7 +24,7 @@
         <div class="panel panel-filled panel-c-{{ $ticket->stateColor }}">
             <div class="panel-heading" style="display: flex; justify-content: space-between">
                 <h4><code>#{{ $ticket->id }}</code>
-                    <div class="label label-{{ $ticket->stateColor }}">{{ strtoupper($ticket->state) }}</div>
+                    <div class="label label-{{ $ticket->stateColor }}">{{ Str::replace('_', ' ',strtoupper($ticket->state)) }}</div>
                 </h4>
 
                 @can('manage', $ticket)
@@ -43,12 +43,27 @@
                         @if (!$ticket->owner || $ticket->owner_id != auth()->id())
                             <form action="{{ route('help.tickets.self-assign', $ticket) }}" method="POST"
                                   class="inline" style="margin-left: 10px;">
-                                <button class="btn btn-info" type="submit">Assign to me</button>
+                                <button class="btn btn-info" type="submit">Assign To Me</button>
                                 {{ method_field('PATCH') }}
                                 {{ csrf_field() }}
                             </form>
                         @endif
                         @unless ($ticket->isResolved())
+                            @unless($ticket->state == 'on_hold')
+                            <form action="{{ route('help.tickets.place-on-hold', $ticket) }}" method="POST"
+                                  class="inline" style="margin-left: 10px;">
+                                <button class="btn btn-info" type="submit">Place On Hold</button>
+                                {{ method_field('PATCH') }}
+                                {{ csrf_field() }}
+                            </form>
+                            @else
+                                <form action="{{ route('help.tickets.self-assign', $ticket) }}" method="POST"
+                                      class="inline" style="margin-left: 10px;">
+                                    <button class="btn btn-info" type="submit">Resume</button>
+                                    {{ method_field('PATCH') }}
+                                    {{ csrf_field() }}
+                                </form>
+                            @endunless
                             <form action="{{ route('help.tickets.resolve', $ticket) }}" method="POST"
                                   class="inline" style="margin-left: 10px;">
                                 <button class="btn btn-success" type="submit">Resolve Ticket</button>
