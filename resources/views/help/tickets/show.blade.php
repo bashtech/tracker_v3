@@ -49,18 +49,18 @@
                             </form>
                         @endif
                         @unless ($ticket->isResolved())
-                            @unless ($ticket->state == 'in_progress')
+                            @unless ($ticket->state == 'in_progress' || $ticket->state == 'new')
                                 <form action="{{ route('help.tickets.in-progress', $ticket) }}" method="POST"
                                       class="inline" style="margin-left: 10px;">
-                                    <button class="btn btn-info" type="submit">In Progress</button>
+                                    <button class="btn btn-accent" type="submit">Place In Progress</button>
                                     {{ method_field('PATCH') }}
                                     {{ csrf_field() }}
                                 </form>
                             @endunless
-                            @unless ($ticket->state == 'on_hold')
+                            @unless ($ticket->state == 'on_hold' || $ticket->state == 'new')
                                 <form action="{{ route('help.tickets.on-hold', $ticket) }}" method="POST"
                                       class="inline" style="margin-left: 10px;">
-                                    <button class="btn btn-info" type="submit">On Hold</button>
+                                    <button class="btn btn-warning" type="submit">Place On Hold</button>
                                     {{ method_field('PATCH') }}
                                     {{ csrf_field() }}
                                 </form>

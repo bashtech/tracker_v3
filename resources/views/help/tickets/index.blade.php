@@ -42,16 +42,16 @@
                 <small class="text-uppercase">
                     <a href="?filter[state]=new"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'new' ? 'active' : '' }}">
-                        <i class="fa fa-asterisk text-info"></i> New</a>
+                        <i class="fa fa-asterisk text-primary"></i> New</a>
                     <a href="?filter[state]=assigned"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'assigned' ? 'active' : '' }}">
-                        <i class="fa fa-user-circle text-accent"></i> Assigned</a>
+                        <i class="fa fa-user-circle text-info"></i> Assigned</a>
                     <a href="?filter[state]=in_progress"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'in_progress' ? 'active' : '' }}">
                         <i class="fa fa-sync text-accent"></i> In Progress</a>
                     <a href="?filter[state]=on_hold"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'on_hold' ? 'active' : '' }}">
-                        <i class="fa fa-hourglass-half text-info"></i> On Hold</a>
+                        <i class="fa fa-hourglass-half text-warning"></i> On Hold</a>
                     <a href="?filter[state]=resolved"
                        class="btn btn-rounded btn-default {{ request()->input('filter.state') == 'resolved' ? 'active' : '' }}">
                         <i class="fa fa-check-circle text-success"></i> Resolved</a>

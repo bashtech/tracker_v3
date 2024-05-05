@@ -18,10 +18,10 @@ class Ticket extends Model
     use Notifiable;
 
     public $stateColors = [
-        'new' => 'accent',
+        'new' => 'primary',
         'assigned' => 'info',
-        'in_progress' => 'info',
-        'on_hold' => 'info',
+        'in_progress' => 'accent',
+        'on_hold' => 'warning',
         'resolved' => 'success',
         'rejected' => 'danger',
     ];
