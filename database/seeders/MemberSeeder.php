@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Census;
 use App\Models\Division;
 use App\Models\Member;
-use App\Models\MemberHandle;
 use App\Models\Platoon;
 use App\Models\Squad;
 use App\Models\User;
@@ -62,12 +61,6 @@ class MemberSeeder extends Seeder
                     'squad_id' => $squad,
                 ]);
             }
-        }
-
-        foreach (Member::all() as $member) {
-            MemberHandle::factory()->count(1)->create([
-                'member_id' => $member,
-            ]);
         }
     }
 }
