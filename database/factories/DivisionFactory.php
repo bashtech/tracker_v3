@@ -23,10 +23,12 @@ class DivisionFactory extends Factory
     {
         $game = $this->faker->game;
 
+        $slug = Str::slug($game['name']);
+
         return [
             'name' => $game['name'],
-            'slug' => Str::slug($game['name']),
-            'handle_id' => Handle::factory(),
+            'slug' => $slug,
+            'handle_id' => Handle::factory()->state(['label' => sprintf('%s_handle', $slug), printf('%s_handle', $slug)]),
             'abbreviation' => strtolower($game['abbreviation']),
             'description' => $this->faker->sentence,
             'forum_app_id' => rand(100, 999),
