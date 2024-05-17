@@ -28,7 +28,7 @@ class DivisionFactory extends Factory
         return [
             'name' => $game['name'],
             'slug' => $slug,
-            'handle_id' => Handle::factory()->state(['label' => sprintf('%s_handle', $slug), printf('%s_handle', $slug)]),
+            'handle_id' => Handle::factory(),
             'abbreviation' => strtolower($game['abbreviation']),
             'description' => $this->faker->sentence,
             'forum_app_id' => rand(100, 999),

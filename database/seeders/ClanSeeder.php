@@ -83,10 +83,10 @@ class ClanSeeder extends Seeder
             }
         }
 
-        foreach (Member::all() as $member) {
-            MemberHandle::factory()->count(1)->create([
-                'member_id' => $member,
-            ]);
-        }
+//        foreach (Member::all() as $member) {
+//            MemberHandle::factory()->count(1)->create([
+//                'member_id' => $member,
+//            ]);
+//        }
     }
 }
